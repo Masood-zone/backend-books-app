@@ -9,6 +9,7 @@ const authorsRouter = require("./routes/author");
 const bodyParser = require("body-parser");
 const compression = require("compression");
 const path = require("path");
+const compression = require("compression");
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
