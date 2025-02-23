@@ -7,13 +7,17 @@ const mongoose = require("mongoose");
 const indexRouter = require("./routes/index");
 const authorsRouter = require("./routes/author");
 const bodyParser = require("body-parser");
+const compression = require("compression");
+const path = require("path");
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
 app.set("layout", "layouts/layout");
 app.use(expressLayout);
 app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: false }));
+app.use(compression());
 
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
