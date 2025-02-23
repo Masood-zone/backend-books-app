@@ -6,13 +6,17 @@
     <link href="/styles/output.css" rel="stylesheet" />
     <title>KiritoLibrary</title>
   </head>
-  <body>
-    <!-- Header -->
-    <%- include('../partials/header.ejs') %>
-    <!-- Error messages -->
-    <%- include('../partials/errorMessage.ejs', { errorMessage:
-    locals.errorMessage })%>
-    <!-- Body -->
-    <%- body %>
+  <!-- Converted base styling to TailwindCSS -->
+  <body class="bg-gray-100">
+    <div class="container mx-auto">
+      <!-- Header -->
+      <%- include('../partials/header.ejs',{ currentPage: locals.currentPage })
+      %>
+      <!-- Error messages -->
+      <%- include('../partials/errorMessage.ejs', { errorMessage:
+      locals.errorMessage }) %>
+      <!-- Body -->
+      <%- body %>
+    </div>
   </body>
 </html>

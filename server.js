@@ -4,11 +4,12 @@ const express = require("express");
 const app = express();
 const expressLayout = require("express-ejs-layouts");
 const mongoose = require("mongoose");
-const indexRouter = require("./routes/index");
-const authorsRouter = require("./routes/author");
 const bodyParser = require("body-parser");
 const compression = require("compression");
 const path = require("path");
+const indexRouter = require("./routes/index");
+const authorsRouter = require("./routes/author");
+const booksRouter = require("./routes/books");
 
 app.set("view engine", "ejs");
 app.set("views", __dirname + "/views");
@@ -26,6 +27,7 @@ db.once("open", () => console.log("Connected to Mongoose"));
 
 app.use("/", indexRouter);
 app.use("/authors", authorsRouter);
+app.use("/books", booksRouter);
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server is running on port 3000");

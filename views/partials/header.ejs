@@ -1,11 +1,133 @@
-<header>
-  <nav>
-    <a href="/">KiritoLibrary</a>
-  </nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/books">Books</a></li>
-    <li><a href="/authors">Authors</a></li>
-    <li><a href="/authors/new">Add Author</a></li>
-  </ul>
+<header class="bg-gradient-to-r from-purple-800 to-indigo-900 text-white p-4">
+  <div class="container mx-auto">
+    <nav class="flex justify-between items-center">
+      <a
+        href="/"
+        class="text-2xl font-bold tracking-wider hover:text-purple-300 transition-colors duration-300"
+      >
+        KiritoLibrary
+      </a>
+      <button id="menu-toggle" class="block lg:hidden focus:outline-none">
+        <svg
+          id="menu-icon"
+          class="w-6 h-6 transition-transform duration-300 ease-in-out"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"
+          ></path>
+        </svg>
+      </button>
+      <ul
+        id="menu"
+        class="hidden lg:flex lg:space-x-8 flex-col lg:flex-row absolute lg:relative top-16 lg:top-auto left-0 w-full lg:w-auto bg-purple-900 lg:bg-transparent transition-all duration-300 ease-in-out opacity-0 lg:opacity-100 -translate-y-2 lg:translate-y-0"
+      >
+        <li class="group">
+          <a
+            href="/"
+            class="block py-2 px-4 lg:p-0 <%= currentPage === 'home' ? 'text-purple-300' : 'hover:text-purple-300' %> transition-colors duration-300"
+          >
+            Home
+            <span
+              class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-purple-300"
+            ></span>
+          </a>
+        </li>
+        <li class="group">
+          <a
+            href="/books"
+            class="block py-2 px-4 lg:p-0 <%= currentPage === 'books' ? 'text-purple-300' : 'hover:text-purple-300' %> transition-colors duration-300"
+          >
+            Books
+            <span
+              class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-purple-300"
+            ></span>
+          </a>
+        </li>
+        <li class="group">
+          <a
+            href="/books/new"
+            class="block py-2 px-4 lg:p-0 <%= currentPage === 'add-book' ? 'text-purple-300' : 'hover:text-purple-300' %> transition-colors duration-300"
+          >
+            Add Book
+            <span
+              class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-purple-300"
+            ></span>
+          </a>
+        </li>
+        <li class="group">
+          <a
+            href="/authors"
+            class="block py-2 px-4 lg:p-0 <%= currentPage === 'authors' ? 'text-purple-300' : 'hover:text-purple-300' %> transition-colors duration-300"
+          >
+            Authors
+            <span
+              class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-purple-300"
+            ></span>
+          </a>
+        </li>
+        <li class="group">
+          <a
+            href="/authors/new"
+            class="block py-2 px-4 lg:p-0 <%= currentPage === 'add-author' ? 'text-purple-300' : 'hover:text-purple-300' %> transition-colors duration-300"
+          >
+            Add Author
+            <span
+              class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-purple-300"
+            ></span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("menu");
+    const menuIcon = document.getElementById("menu-icon");
+
+    menuToggle.addEventListener("click", function () {
+      menu.classList.toggle("hidden");
+      menu.classList.toggle("opacity-0");
+      menu.classList.toggle("-translate-y-2");
+      menuIcon.classList.toggle("rotate-90");
+
+      if (!menu.classList.contains("hidden")) {
+        setTimeout(() => {
+          menu.classList.remove("opacity-0", "-translate-y-2");
+        }, 10);
+      }
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener("click", function (event) {
+      const isClickInside =
+        menu.contains(event.target) || menuToggle.contains(event.target);
+      if (
+        !isClickInside &&
+        !menu.classList.contains("hidden") &&
+        window.innerWidth < 1024
+      ) {
+        menu.classList.add("hidden", "opacity-0", "-translate-y-2");
+        menuIcon.classList.remove("rotate-90");
+      }
+    });
+
+    // Adjust menu visibility on window resize
+    window.addEventListener("resize", function () {
+      if (window.innerWidth >= 1024) {
+        menu.classList.remove("hidden", "opacity-0", "-translate-y-2");
+      } else if (!menuToggle.classList.contains("hidden")) {
+        menu.classList.add("hidden", "opacity-0", "-translate-y-2");
+      }
+    });
+  });
+</script>
