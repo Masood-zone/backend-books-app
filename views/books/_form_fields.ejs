@@ -1,25 +1,70 @@
-<div>
-  <!-- Title -->
-  <label for="title">Title:</label>
-  <input
-    type="text"
-    id="title"
-    name="title"
-    value="<%= book.title ? book.title : '' %>"
-    class="form-control bg-gray-100 border border-gray-300 rounded-lg p-2 w-full"
-    placeholder="Enter book title"
-  />
-  <!-- Authors -->
-  <label for="authors">Author:</label>
-  <select name="author">
-    <% authors.forEach(author) => { %> <% if (author.id === book.author) { %>
-    <option
-      selected
+<!-- Title -->
+ <div>
+
+   <label for="title">Title:</label>
+   <input
+   type="text"
+   id="title"
+   name="title"
+   value="<%= book.title ? book.title : '' %>"
+   class="form-control bg-gray-100 border border-gray-300 rounded-lg p-2 w-full"
+   placeholder="Enter book title"
+   />
+  </div>
+  <div>
+
+    <!-- Author -->
+    <label for="author">Author:</label>
+  <select name="author" id="author">
+    <% authors.forEach(author => { %>
+      <option 
       label="<%= author.name %>"
-      value="<%= author.id%>"
-    ></option>
-    <% }else %>
-    <option label="<%= author.name %>" value="<%= author.id%>"></option>
-    <% } %> <% }) %>
-  </select>
+        value="<%= author.id %>"
+        <%= author.id === book.author ? 'selected' : '' %>
+      >
+        <%= author.name %>
+      </option>
+      <% }); %>
+    </select>
+  </div>
+  <div>
+    <!-- Published Date -->
+    <label for="publishDate">Publish Date:</label>
+<input
+  type="date"
+  id="publishDate"
+  name="publishDate"
+  value="<%= book.publishDate ? book.publishDate.toISOString().split('T')[0] : '' %>"
+/>
+</div>
+<div>
+  <!-- Page Count -->
+  <label for="pageCount">Page Count:</label>
+  <input
+    type="number"
+    id="pageCount"
+    name="pageCount"
+    min="1"
+    value="<%= book.pageCount ? book.pageCount : '' %>"
+  />
+</div>
+<div>
+  <!-- Cover Image URL -->
+  <label for="cover">Cover Image URL:</label>
+  <input
+    type="file"
+    id="cover"
+    name="cover"
+    class="form-control bg-gray-100 border border-gray-300 rounded-lg p-2 w-full"
+  />
+</div>
+<div>
+  <!-- Description -->
+  <label for="description">Description:</label>
+  <textarea
+    id="description"
+    name="description"
+    class="form-control bg-gray-100 border border-gray-300 rounded-lg p-2 w-full"
+    placeholder="Enter book description"
+  ><%= book.description ? book.description : '' %></textarea>
 </div>

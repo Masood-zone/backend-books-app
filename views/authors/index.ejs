@@ -11,10 +11,10 @@
   <button id="search" type="submit">Search</button>
 </form>
 
-<br />
-
-<% authors.forEach(author => { %>
 <div>
-  <h3><%= author.name %></h3>
+  <% authors.forEach(author => { %>
+  <div>
+    <h3><%= author.name %></h3>
+  </div>
+  <% }) %>
 </div>
-<% }) %>

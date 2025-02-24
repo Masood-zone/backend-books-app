@@ -1,2 +1,10 @@
-This is the index file for the application. It is the first file that is loaded
-when the application is started
+<h2>Recently Added</h2>
+
+<div>
+  <% books.forEach(book => { %>
+  <img height="150" src="<%=book.coverImagePath%>" alt="<%=book.title%>" />
+  <h3><%=book.title%></h3>
+  <p><%=book.author.name%></p>
+  <p><%=book.publishDate%></p>
+  <% }) %>
+</div>
